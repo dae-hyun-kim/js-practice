@@ -64,3 +64,9 @@ const jane = Object.create(personProto, {
 */
 
                         // Primitives vs Objects //
+let a = 23;
+let b = a;
+a = 46;
+
+console.log(a)
+console.log(b)
