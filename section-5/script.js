@@ -9,6 +9,8 @@ const john = {
 
 */
 
+/*
+
 const Person = function(name, yearOfBirth, job) {
   this.name = name;
   this.yearOfBirth = yearOfBirth;
@@ -34,3 +36,18 @@ mark.calculateAge();
 console.log(john.lastName);
 console.log(jane.lastName);
 console.log(mark.lastName);
+
+*/
+
+//Object.create
+
+const personProto = {
+  calculateAge: function() {
+    console.log(2020 - this.yearOfBirth);
+  }
+}
+
+const john = Object.create(personProto);
+john.name = "John";
+john.yearOfBirth = 1990;
+john.job = "teacher";
