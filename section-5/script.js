@@ -1,5 +1,6 @@
 /*
-Function Constructor
+
+                        //Function Constructor//
 
 const john = {
   name: "John",
@@ -39,7 +40,9 @@ console.log(mark.lastName);
 
 */
 
-//Object.create
+                  //Object.create//
+
+/*
 
 const personProto = {
   calculateAge: function() {
@@ -57,3 +60,7 @@ const jane = Object.create(personProto, {
   yearOfBirth: { value: 1969},
   job: { value: "designer"}
 })
+
+*/
+
+                        // Primitives vs Objects //
