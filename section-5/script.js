@@ -153,7 +153,7 @@ console.log(rates)
 function interviewQuestion(job) {
   if (job === "designer") {
     return (name) => {
-      console.log(name + ", can you please explain what you UX design is?");
+      console.log(name + ", can you please explain what UX design is?");
     }
   } else if  (job === "teacher") {
     return (name) => {
@@ -198,5 +198,68 @@ game();
   let score = Math.random() * 10;
   console.log(score >= 5 - goodLuck);
 })(5);
+
+*/
+
+
+                      // Closures
+
+function retirement(retirementAge) {
+  return (yearOfBirth) => {
+    const a = " years left until retirement";
+    let age = 2020 - yearOfBirth;
+    console.log((retirementAge - age) + a)
+  }
+}
+
+const retirementUS = retirement(66);
+retirementUS(1990);
+
+const retirementGermany = retirement(65);
+retirementGermany(1990);
+
+const retirementIceland = retirement(67);
+retirementIceland(1990)
+
+//retirement(66)(1990);
+
+/*
+function interviewQuestion(job) {
+  if (job === "designer") {
+    return (name) => {
+      console.log(name + ", can you please explain what UX design is?");
+    }
+  } else if (job === "teacher") {
+    return (name) => {
+      console.log("What subject do you teach, " + name);
+    }
+  } else {
+    return (name) => {
+      console.log(`Hello. ${name}, what do you do?`);
+    }
+  }
+}
+
+*/
+
+/*
+function interviewQuestions(job) {
+  return (name) => {
+    if (job === "designer") {
+    console.log(`${name}, can you please explain what UX design is?`);
+    } else if (job === "teacher") {
+    console.log(`What subject do you teach, ${name}?`);
+  } else {
+    console.log(`Hello, ${name}, what do you do?`)
+  }
+}
+}
+
+
+
+interviewQuestions("designer")("John");
+
+const teacherQuestion = interviewQuestions("teacher");
+teacherQuestion("James")
 
 */
