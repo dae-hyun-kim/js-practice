@@ -267,6 +267,7 @@ teacherQuestion("James")
 
                       // Bind, Call, and Apply
 
+/*
 const john = {
   name: "John",
   age: 26,
@@ -289,4 +290,43 @@ const emily = {
 
 john.presentation("formal", "morning");
 
-john.presentation.call(emily, "friendly", "afternoon")
+john.presentation.call(emily, "friendly", "afternoon");
+
+//john.presentation.apply(emily, ["friendly", "afternoon"]);
+
+const johnFriendly = john.presentation.bind(john, "friendly");
+johnFriendly("morning");
+johnFriendly("night");
+
+const emilyFormal = john.presentation.bind(emily, "formal");
+emilyFormal("afternoon")
+
+
+
+const years = [1990, 1965, 1937, 2005, 1998];
+
+function arrayCalc(arr, fn) {
+  const arrResult = [];
+  for (let i = 0; i < arr.length; i++) {
+    arrResult.push(fn(arr[i]));
+  }
+
+  return arrResult;
+}
+
+function calculateAge(el) {
+  return 2020 - el;
+}
+
+function isFullAge(limit, el) {
+  return el >= limit;
+}
+
+const ages = arrayCalc(years, calculateAge);
+
+const fullJapan = arrayCalc(ages, isFullAge.bind(this, 20));
+
+console.log(ages)
+console.log(fullJapan)
+
+*/
