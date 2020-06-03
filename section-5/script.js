@@ -64,6 +64,8 @@ const jane = Object.create(personProto, {
 */
 
                         // Primitives vs Objects //
+/*
+
 let a = 23;
 let b = a;
 a = 46;
@@ -100,3 +102,44 @@ function change(a,b) {
 change(age, obj);
 console.log(age);
 console.log(obj.city)
+
+*/
+
+                        // Passing Functions as arguments
+
+const years = [1990, 1965, 1937, 2005, 1998];
+
+function arrayCalc(arr, fn) {
+  const arrResult = [];
+  for (let i = 0; i < arr.length; i++) {
+    arrResult.push(fn(arr[i]));
+  }
+
+  return arrResult;
+}
+
+function calculateAge(el) {
+  return 2020 - el;
+}
+
+function isFullAge(el) {
+  return el >= 18
+}
+
+function heartRate(el) {
+  if (el >= 18 && el <= 81) {
+    return parseInt(206.9 - (0.67 * el))
+  } else {
+    return -1
+  }
+}
+
+const ages = arrayCalc(years, calculateAge);
+
+const fullAges = arrayCalc(ages, isFullAge);
+
+const rates = arrayCalc(ages, heartRate);
+
+console.log(ages);
+console.log(fullAges);
+console.log(rates)
