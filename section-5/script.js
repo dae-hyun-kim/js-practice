@@ -353,3 +353,34 @@ c) correct answer(I would use a number for this)
 7. Suppose this code would be a plugin for other programmers to use in their code.So make sure that all your code is private and doesn't interfere with the other programmers code (Hint: we learned a special technique to do exactly that).
 
 */
+
+const Question = function(question, answers, correctAnswer) {
+  this.question =  question;
+  this.answers = answers;
+  this.correctAnswer = correctAnswer;
+}
+
+const myNameQuestion = new Question("What is my name?", ["Danny", "Kevin", "David"], 0);
+const myAgeQuestion = new Question("What is my age?", [24, 29, 32, 25], 3);
+const myGenderQuestion = new Question("What is my gender?", ["female", "male"], 1);
+
+const myQuestionsArray = [myNameQuestion, myAgeQuestion, myGenderQuestion];
+
+function askQuestions(questionArray) {
+  const questionNumber = Math.floor(Math.random() * Math.floor(questionArray.length));
+  const selectedQuestion = questionArray[questionNumber];
+  console.log(selectedQuestion.question);
+  for (let i = 0; i < selectedQuestion.answers.length; i++) {
+    console.log(`${i}: ${selectedQuestion.answers[i]}`)
+  }
+
+  const clientAnswer = prompt("Please select the correct answer (Just the answer number)")
+
+  if (Number(clientAnswer) === selectedQuestion.correctAnswer) {
+    console.log("That is the correct answer");
+  } else {
+    console.log("That is incorrect");
+  }
+}
+
+askQuestions(myQuestionsArray)
