@@ -354,6 +354,12 @@ c) correct answer(I would use a number for this)
 
 */
 
+
+                                        // CODING CHALLENGE
+
+/* My Answer
+
+
 const Question = function(question, answers, correctAnswer) {
   this.question =  question;
   this.answers = answers;
@@ -384,3 +390,47 @@ function askQuestions(questionArray) {
 }
 
 askQuestions(myQuestionsArray)
+
+*/
+
+
+//Instructor Answer
+
+(function() {
+  const Question = function (question, answers, correctAnswer) {
+    this.question = question;
+    this.answers = answers;
+    this.correctAnswer = correctAnswer;
+  }
+
+  Question.prototype.askQuestion = function () {
+    console.log(this.question);
+
+    for (let i = 0; i < this.answers.length; i++) {
+      console.log(`${i}: ${this.answers[i]}`)
+    }
+  }
+
+  Question.prototype.checkAnswer = function (ans) {
+    if (ans === this.correctAnswer) {
+      console.log("That is the correct answer")
+    } else {
+      console.log("That is the incorrect answer");
+    }
+  }
+
+  const myNameQuestion = new Question("What is my name?", ["Danny", "Kevin", "David"], 0);
+  const myAgeQuestion = new Question("What is my age?", [24, 29, 32, 25], 3);
+  const myGenderQuestion = new Question("What is my gender?", ["female", "male"], 1);
+
+  const myQuestionsArray = [myNameQuestion, myAgeQuestion, myGenderQuestion];
+
+  let n = Math.floor(Math.random() * myQuestionsArray.length);
+
+  myQuestionsArray[n].askQuestion();
+
+  let answer = parseInt(prompt("Please select the correct answer (input just the number)"));
+
+  myQuestionsArray[n].checkAnswer(answer);
+
+})();
