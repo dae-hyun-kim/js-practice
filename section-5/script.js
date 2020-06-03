@@ -204,6 +204,7 @@ game();
 
                       // Closures
 
+/*
 function retirement(retirementAge) {
   return (yearOfBirth) => {
     const a = " years left until retirement";
@@ -222,7 +223,7 @@ const retirementIceland = retirement(67);
 retirementIceland(1990)
 
 //retirement(66)(1990);
-
+*/
 /*
 function interviewQuestion(job) {
   if (job === "designer") {
@@ -263,3 +264,29 @@ const teacherQuestion = interviewQuestions("teacher");
 teacherQuestion("James")
 
 */
+
+                      // Bind, Call, and Apply
+
+const john = {
+  name: "John",
+  age: 26,
+  job: "teacher",
+  presentation: function(style, timeOfDay) {
+    if (style === "formal") {
+      console.log(`Good ${timeOfDay}, Ladies and Gentlemen! I'm ${this.name}, I'm a ${this.job} and I'm ${this.age} years old.`);
+    } else if (style === "friendly") {
+      console.log(`Hey! What's up?. I'm ${this.name}, I'm a ${this.job} and I'm ${this.age} years old. Have a nice ${timeOfDay}.`);
+    }
+  }
+}
+
+const emily = {
+  name: "Emily",
+  age: 35,
+  job: "designer"
+}
+
+
+john.presentation("formal", "morning");
+
+john.presentation.call(emily, "friendly", "afternoon")
