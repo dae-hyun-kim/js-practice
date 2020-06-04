@@ -36,13 +36,25 @@ const UIController = (function() {
 
 })();
 
-
-
 // GLOBAL CONTROLLER
 
 const controller = (function(budgetCtrl, UICtrl) {
 
-  const DOM = UICtrl.getDOMstrings();
+  const setupEventListeners = function() {
+
+    const DOM = UICtrl.getDOMstrings();
+
+    document.querySelector(DOM.addButton).addEventListener("click", ctrlAddItem);
+
+    document.addEventListener("keypress", (event) => {
+      if (event.keyCode === 13 || event.which === 13) {
+        ctrlAddItem();
+      }
+    });
+
+  }
+
+
 
   const ctrlAddItem = function() {
 
@@ -59,17 +71,14 @@ const controller = (function(budgetCtrl, UICtrl) {
 
     // 5. Display the budget on user interface
 
-  }
+  };
 
-  document.querySelector(DOM.addButton).addEventListener("click", ctrlAddItem);
-
-  document.addEventListener("keypress", (event) => {
-
-    if (event.keyCode === 13 || event.which === 13) {
-      ctrlAddItem();
+  return {
+    init: function() {
+      setupEventListeners();
     }
-
-
-  })
+  };
 
 })(budgetController, UIController);
+
+controller.init();
