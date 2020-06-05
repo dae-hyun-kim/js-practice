@@ -114,6 +114,7 @@ const UIController = (function() {
     incomeLabel: ".budget__income--value",
     expensesLabel: ".budget__expenses--value",
     percentageLabel: ".budget__expenses--percentage",
+    container: ".container"
   }
 
   return {
@@ -133,10 +134,10 @@ const UIController = (function() {
 
     if (type === "inc") {
       element = DOMstrings.incomeContainer;
-      html = `<div class="item clearfix" id="income-${obj.id}"> <div class="item__description" > ${obj.description} </div ><div class="right clearfix"><div class="item__value">${obj.value}</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div >`
+      html = `<div class="item clearfix" id="inc-${obj.id}"> <div class="item__description" > ${obj.description} </div ><div class="right clearfix"><div class="item__value">${obj.value}</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div >`
     } else if (type === "exp") {
       element = DOMstrings.expenseContainer;
-      html = `<div class="item clearfix" id = "expense-${obj.id}"><div class="item__description" > ${obj.description} </div><div class="right clearfix"><div class="item__value">${obj.value}</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div >`
+      html = `<div class="item clearfix" id = "exp-${obj.id}"><div class="item__description" > ${obj.description} </div><div class="right clearfix"><div class="item__value">${obj.value}</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div >`
     }
 
       // Insert the HTML into the DOM
@@ -194,6 +195,9 @@ const controller = (function(budgetCtrl, UICtrl) {
       }
     });
 
+
+    document.querySelector(DOM.container).addEventListener("click", ctrlDeleteItem);
+
   }
 
   const updateBudget = function() {
@@ -241,6 +245,21 @@ const controller = (function(budgetCtrl, UICtrl) {
     }
 
   };
+
+  const ctrlDeleteItem = function(event) {
+    let itemId, splitID, type, ID;
+
+    itemId = event.target.parentNode.parentNode.parentNode.parentNode.id;
+
+    if(itemId) {
+
+      splitID = itemId.split("-");
+      type = splitID[0];
+      ID = splitID[1];
+
+    }
+
+  }
 
   return {
     init: function() {
