@@ -68,6 +68,8 @@ const UIController = (function() {
     inputDescription: ".add__description",
     inputValue: ".add__value",
     addButton: ".add__btn",
+    incomeContainer: ".income__list",
+    expenseContainer: ".expenses__list",
   }
 
   return {
@@ -78,6 +80,24 @@ const UIController = (function() {
         description: document.querySelector(DOMstrings.inputDescription).value,
         value: document.querySelector(DOMstrings.inputValue).value
       }
+    },
+
+    addListItem: function(obj, type) {
+
+    let html, element;
+      // Create HTML string with placeholder text
+
+    if (type === "inc") {
+      element = DOMstrings.incomeContainer;
+      html = `<div class="item clearfix" id="income-${obj.id}"> <div class="item__description" > ${obj.description} </div ><div class="right clearfix"><div class="item__value">${obj.value}</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div >`
+    } else if (type === "exp") {
+      element = DOMstrings.expenseContainer;
+      html = `<div class="item clearfix" id = "expense-${obj.id}"><div class="item__description" > ${obj.description} </div><div class="right clearfix"><div class="item__value">${obj.value}</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div >`
+    }
+
+      // Insert the HTML into the DOM
+    document.querySelector(element).insertAdjacentHTML('beforeend', html);
+
     },
 
     getDOMstrings: function() {
@@ -121,6 +141,7 @@ const controller = (function(budgetCtrl, UICtrl) {
 
     // 3. Add the item to the user interface
 
+    UICtrl.addListItem(newItem, input.type)
     // 4. Calculate the budget
 
     // 5. Display the budget on user interface
