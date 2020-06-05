@@ -5,12 +5,21 @@ const budgetController = (function() {
     this.id = id;
     this.description = description;
     this.value = value;
-  }
+  };
 
   const Income = function (id, description, value) {
     this.id = id;
     this.description = description;
     this.value = value;
+  };
+
+  const calculateTotal = function(type) {
+    let sum = 0;
+    data.allItems[type].forEach(function(cur) {
+      sum = sum + cur.value;
+    });
+
+    data.totals[type] = sum;
   }
 
   const data = {
@@ -21,7 +30,9 @@ const budgetController = (function() {
     totals: {
       exp: 0,
       inc: 0,
-    }
+    },
+    budget: 0,
+    percentage: -1
   }
 
   return {
@@ -47,6 +58,35 @@ const budgetController = (function() {
 
       // RETURN NEW ELEMENT
       return newItem;
+    },
+
+    calculateBudget: function() {
+
+      // Calculate total income and expenses
+
+      calculateTotal("exp");
+      calculateTotal("inc");
+
+      // Calculate the budget: income - expenses
+
+      data.budget = data.totals.inc - data.totals.exp;
+
+      // Calculate the percentage of income that we spent
+      if (data.totals.inc > 0) {
+        data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100);
+      } else {
+        data.percentage = -1
+      }
+    },
+
+    getBudget: function() {
+      return {
+        budget: data.budget,
+        totalInc: data.totals.inc,
+        totalExp: data.totals.exp,
+        percentage: data.percentage,
+      }
+
     },
 
     testing: function() {
@@ -142,9 +182,14 @@ const controller = (function(budgetCtrl, UICtrl) {
 
     // 1. Calculate the budget
 
+    budgetCtrl.calculateBudget();
+
     // 2. Return the budget
 
+    const budget = budgetCtrl.getBudget();
+
     // 3. Display the budget on user interface
+    console.log(budget)
 
   }
 
@@ -172,9 +217,7 @@ const controller = (function(budgetCtrl, UICtrl) {
 
       UICtrl.clearFields();
 
-    // 5. Calculate and update budget
-
-    // 6. Call update budget
+      updateBudget();
 
     }
 
