@@ -366,6 +366,7 @@ Array.from(all).forEach(cur => {
 
 */
 
+/*
 // LECTURE: REST PARAMETERS
 
 // ES5
@@ -387,3 +388,37 @@ function isFullAge6(...years) {
 }
 
 isFullAge6(1990, 1999, 1965, 2016, 1987);
+
+*/
+
+/*
+// LECTURE: DEFAULT PARAMETERS
+
+// ES5
+function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
+
+  lastName === undefined ? lastName = "Smith" : lastName;
+
+  nationality === undefined ? nationality = "American" : nationality
+
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.yearOfBirth = yearOfBirth;
+  this.nationality = nationality
+}
+
+var john = new SmithPerson("John", 1990);
+var emily = new SmithPerson("Emily", 1983, "Diaz", "Spanish");
+
+// ES6
+function SmithPerson(firstName, yearOfBirth, lastName = "Smith", nationality = "American") {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.yearOfBirth = yearOfBirth;
+  this.nationality = nationality
+}
+
+var john = new SmithPerson("John", 1990);
+var emily = new SmithPerson("Emily", 1983, "Diaz", "Spanish");
+
+*/
