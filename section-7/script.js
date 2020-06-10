@@ -525,3 +525,101 @@ var johnAthlete5 = new Athlete5("John", 1990, "swimmer", 3, 10);
 johnAthlete5.calculateAge();
 
 */
+
+// CODING CHALLENGE
+
+/*
+
+Suppose that you're working in a small town administration, and you're in charge of two town elements:
+1. Parks
+2. Streets
+
+It's a very small town, so right now there are only 3 parks and 4 streets. All parks and streets have a name and a build year.
+
+At an end-of-year meeting, your boss wants a final report with the following:
+1. Tree density of each park in the town (forumla: number of trees/park area)
+2. Average age of each town's park (forumla: sum of all ages/number of parks)
+3. The name of the park that has more than 1000 trees
+4. Total and average length of the town's streets
+5. Size classification of all streets: tiny/small/normal/big/huge. If the size is unknown, the default is normal
+
+All the report data should be printed to the console.
+
+HINT: Use some of the ES6 features: classes, subclasses, template strings, default parameters, maps, arrow functions, destructuring, etc.
+
+*/
+
+class Parks {
+  constructor(name, buildYear, numOfTrees, parkArea) {
+    this.name = name;
+    this.buildYear = buildYear;
+    this.numOfTrees = numOfTrees;
+    this.parkArea = parkArea
+  }
+
+  calculateDensity() {
+    const treeDensity = this.numOfTrees / this.parkArea;
+    console.log(`${this.name} has a tree density of ${treeDensity} trees per mile.`)
+  }
+
+  calculateAge() {
+    const age = new Date().getFullYear() - this.buildYear;
+    return age;
+  }
+}
+
+class Streets {
+  constructor(name, buildYear, length, size = 3) {
+    this.name = name;
+    this.buildYear = buildYear;
+    this.length = length;
+    this.size = size;
+  }
+}
+
+const parks = [new Parks("Green Park", 1983, 1200, 4), new Parks("National Park", 1952, 542, 6), new Parks("Oak Park", 1990, 700, 5)];
+const streets = [new Streets("Ocean Avenue", 1999, 3, 2), new Streets("Evergreen Street", 2008, 2, 1), new Streets("4th Street", 2015, 1), new Streets("Sunset Blvd", 1982, 10, 5)]
+
+
+const getParksReport = function() {
+  console.log("----PARKS REPORT----")
+  let sumAges = 0;
+  let parkAbove1000 = null;
+  parks.forEach((cur) => {
+    cur.calculateDensity();
+    sumAges = sumAges + cur.calculateAge();
+    if (cur.numOfTrees > 1000) {
+      parkAbove1000 = cur.name
+    }
+  });
+  const averageAge = sumAges/parks.length;
+  console.log(`Our ${parks.length} parks have an average age of ${averageAge} years.`)
+  console.log(`${parkAbove1000} has more than 1000 trees.`)
+}
+
+const getStreetsReport = function() {
+  console.log("----STREETS REPORT----");
+  let sumLength = 0;
+  let currentYear = new Date().getFullYear();
+  streets.forEach((current) => {
+    sumLength = sumLength + current.length;
+    let sizeClassification = null;
+    if (current.size === 1) {
+      sizeClassification = "tiny"
+    } else if (current.size === 2) {
+      sizeClassification = "small"
+    } else if (current.size === 3) {
+      sizeClassification = "normal"
+    } else if (current.size === 4) {
+      sizeClassification = "big"
+    } else if (current.size === 5) {
+      sizeClassification = "huge"
+    }
+    console.log(`${current.name}, built in ${currentYear - current.buildYear}, is a ${sizeClassification} street.`)
+  })
+  console.log(`Our ${streets.length} streets have a total length of ${sumLength} miles, with an average length of ${sumLength/streets.length} miles`);
+}
+
+
+getParksReport();
+getStreetsReport();
