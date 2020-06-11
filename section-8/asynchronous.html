@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <h1>Asynchronous JavaScript</h1>
+  <h1 class="temp">Asynchronous JavaScript</h1>
   <script>
 
 /*
@@ -56,6 +56,7 @@
 
 */
 
+/*
     const getIDs = new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve([523, 883, 432, 974]);
@@ -90,6 +91,7 @@
       })
     }
 
+    */
     /*
     getIDs
     .then((IDs) => {
@@ -109,6 +111,7 @@
     })
     */
 
+    /*
     async function getRecipesAW() {
       const IDs = await getIDs;
       console.log(IDs);
@@ -123,7 +126,24 @@
     getRecipesAW().then((result) => {
       console.log(`${result} is the best ever.`)
     });
+*/
 
+    function getWeather(woeid) {
+     fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}/`)
+        .then(result => {
+          return result.json();
+        })
+        .then(data => {
+          const today = data.consolidated_weather[0];
+          console.log(`Temperature in ${data.title} stays between ${today.min_temp} and ${today.max_temp}`);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+
+    getWeather(2487956);
+    getWeather(44418);
 
   </script>
 </body>
