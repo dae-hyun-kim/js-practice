@@ -90,6 +90,7 @@
       })
     }
 
+    /*
     getIDs
     .then((IDs) => {
       console.log(IDs);
@@ -106,6 +107,22 @@
     .catch((error) => {
       console.log(error)
     })
+    */
+
+    async function getRecipesAW() {
+      const IDs = await getIDs;
+      console.log(IDs);
+      const recipe = await getRecipe(IDs[2]);
+      console.log(recipe);
+      const recipe2 = await getRelated("Jonas");
+      console.log(recipe2);
+
+      return recipe
+    }
+
+    getRecipesAW().then((result) => {
+      console.log(`${result} is the best ever.`)
+    });
 
 
   </script>
